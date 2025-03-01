@@ -40,7 +40,7 @@ void printFreqances(size_t *counts) {
     }
 }
 
-void printFile(FILE * file){
+void printFile(FILE *file) {
     rewind(file);
     char tempC;
     while ((tempC = getc(file)) > 0) fputc(tempC, stdout);
@@ -77,6 +77,7 @@ int main(int argc, char const *argv[]) {
             while ((tempC = getc(stdin)) != '\n') fputc(tempC, file);
             readLineWithDialog_v(&str, "Please enter replacment character: ", NULL, isCharString);
             rchar = str[0];
+            free(str);
             break;
 
         case DEMO_INPUT:
@@ -95,10 +96,11 @@ int main(int argc, char const *argv[]) {
             }
             rchar = (char)map(0, 254803967, 32, 126, (double)MrandomUInt(seed));
             fwrite(str, sizeof(char), length, file);
-
+            free(str);
             break;
-            case EXIT_INPUT:
-                return 0;
+            
+        case EXIT_INPUT:
+            return 0;
             break;
 
         default:
